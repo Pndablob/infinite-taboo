@@ -1,0 +1,1 @@
+An infinite [Taboo](https://en.wikipedia.org/wiki/Taboo_(game)) card generator using Qwen2.5
