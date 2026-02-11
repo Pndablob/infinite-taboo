@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taboo Game</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 600px;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .timer {
+            font-size: 3em;
+            font-weight: bold;
+            margin: 10px 0;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .timer.warning {
+            color: #ff6b6b;
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .score-display {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .card {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .target-word {
+            font-size: 3em;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .banned-words {
+            background: #fff5f5;
+            border: 3px solid #ff6b6b;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+        }
+
+        .banned-words h3 {
+            color: #c92a2a;
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .banned-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .banned-item {
+            background: white;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 1.2em;
+            font-weight: 500;
+            color: #c92a2a;
+            border: 2px solid #ff6b6b;
+        }
+
+        .controls {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        .timer-controls {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .btn-timer {
+            padding: 12px 20px;
+            font-size: 1em;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 2px solid white;
+            flex: 1;
+        }
+
+        .btn-timer:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        button {
+            flex: 1;
+            padding: 18px 30px;
+            font-size: 1.2em;
+            font-weight: bold;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        .btn-correct {
+            background: #51cf66;
+            color: white;
+        }
+
+        .btn-correct:hover {
+            background: #40c057;
+        }
+
+        .btn-skip {
+            background: #ffd43b;
+            color: #333;
+        }
+
+        .btn-skip:hover {
+            background: #fcc419;
+        }
+
+        .btn-start {
+            background: #667eea;
+            color: white;
+            width: 100%;
+        }
+
+        .btn-start:hover {
+            background: #5a67d8;
+        }
+
+        .start-screen, .summary-screen {
+            text-align: center;
+            padding: 40px;
+        }
+
+        .start-screen h2, .summary-screen h2 {
+            font-size: 2em;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .start-screen p {
+            font-size: 1.2em;
+            color: #666;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .summary-screen {
+            padding: 30px;
+        }
+
+        .final-score {
+            font-size: 4em;
+            font-weight: bold;
+            color: #667eea;
+            margin: 20px 0;
+        }
+
+        .word-list {
+            margin-top: 30px;
+            text-align: left;
+        }
+
+        .word-list h3 {
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .word-list-section {
+            margin-bottom: 25px;
+        }
+
+        .word-list-items {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 15px;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .word-list-item {
+            padding: 8px;
+            border-bottom: 1px solid #dee2e6;
+            font-size: 1.1em;
+        }
+
+        .word-list-item:last-child {
+            border-bottom: none;
+        }
+
+        .word-list-item.correct {
+            color: #40c057;
+        }
+
+        .word-list-item.skipped {
+            color: #868e96;
+        }
+
+        .file-input-section {
+            margin-bottom: 30px;
+        }
+
+        .file-input {
+            display: none;
+        }
+
+        .file-label {
+            display: inline-block;
+            padding: 15px 30px;
+            background: #667eea;
+            color: white;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 1.1em;
+        }
+
+        .file-label:hover {
+            background: #5a67d8;
+            transform: translateY(-2px);
+        }
+
+        .file-name {
+            margin-top: 15px;
+            font-size: 1em;
+            color: #40c057;
+            font-weight: bold;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            font-size: 1.5em;
+            color: #667eea;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎯 TABOO GAME</h1>
+            <div class="timer" id="timer">1:00</div>
+            <div class="timer-controls" id="timerControls" style="display: none;">
+                <button class="btn-timer" id="pauseBtn">⏸️ Pause</button>
+                <button class="btn-timer" id="resetBtn">🔄 Reset</button>
+            </div>
+            <div class="score-display">
+                <span id="scoreDisplay">Correct: 0 | Skipped: 0</span>
+            </div>
+        </div>
+
+        <!-- Start Screen -->
+        <div id="startScreen" class="start-screen">
+            <h2>Ready to Play?</h2>
+            <div class="file-input-section">
+                <label for="fileInput" class="file-label">
+                    📁 Load Words File (JSON)
+                </label>
+                <input type="file" id="fileInput" class="file-input" accept=".json">
+                <div id="fileName" class="file-name"></div>
+            </div>
+            <p>Give clues to help your team guess the target word without using any banned words!</p>
+            <p><strong>You have 60 seconds. Good luck!</strong></p>
+            <button class="btn-start" id="startBtn">Start Game</button>
+        </div>
+
+        <!-- Game Screen -->
+        <div id="gameScreen" class="content hidden">
+            <div class="card">
+                <div class="target-word" id="targetWord">WORD</div>
+                <div class="banned-words">
+                    <h3>🚫 Banned Words</h3>
+                    <div class="banned-list" id="bannedList">
+                        <!-- Banned words will be inserted here -->
+                    </div>
+                </div>
+            </div>
+            <div class="controls">
+                <button class="btn-correct" id="correctBtn">✓ Correct</button>
+                <button class="btn-skip" id="skipBtn">→ Skip</button>
+            </div>
+        </div>
+
+        <!-- Summary Screen -->
+        <div id="summaryScreen" class="summary-screen hidden">
+            <h2>🎉 Game Over!</h2>
+            <div class="final-score" id="finalScore">0</div>
+            <p style="font-size: 1.3em; color: #666;">Correct Answers</p>
+            
+            <div class="word-list">
+                <div class="word-list-section">
+                    <h3 style="color: #40c057;">✓ Correct Words</h3>
+                    <div class="word-list-items" id="correctWords">
+                        <!-- Correct words will be listed here -->
+                    </div>
+                </div>
+                
+                <div class="word-list-section">
+                    <h3 style="color: #868e96;">→ Skipped Words</h3>
+                    <div class="word-list-items" id="skippedWords">
+                        <!-- Skipped words will be listed here -->
+                    </div>
+                </div>
+            </div>
+
+            <button class="btn-start" id="playAgainBtn" style="margin-top: 30px;">Play Again</button>
+        </div>
+    </div>
+
+    <script>
+        let words = [];
+        let currentIndex = 0;
+        let correctCount = 0;
+        let skippedCount = 0;
+        let correctWords = [];
+        let skippedWords = [];
+        let timeLeft = 60;
+        let timerInterval = null;
+        let gameActive = false;
+        let isPaused = false;
+        let sessionWords = new Set(); // Track words shown in this session
+
+        const startScreen = document.getElementById('startScreen');
+        const gameScreen = document.getElementById('gameScreen');
+        const summaryScreen = document.getElementById('summaryScreen');
+        const startBtn = document.getElementById('startBtn');
+        const correctBtn = document.getElementById('correctBtn');
+        const skipBtn = document.getElementById('skipBtn');
+        const playAgainBtn = document.getElementById('playAgainBtn');
+        const timerDisplay = document.getElementById('timer');
+        const scoreDisplay = document.getElementById('scoreDisplay');
+        const targetWord = document.getElementById('targetWord');
+        const bannedList = document.getElementById('bannedList');
+        const fileInput = document.getElementById('fileInput');
+        const fileName = document.getElementById('fileName');
+        const pauseBtn = document.getElementById('pauseBtn');
+        const resetBtn = document.getElementById('resetBtn');
+        const timerControls = document.getElementById('timerControls');
+
+        // Load JSON file
+        fileInput.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                fileName.textContent = `✓ Loaded: ${file.name}`;
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    try {
+                        words = JSON.parse(event.target.result);
+                        if (words.length > 0) {
+                            startBtn.disabled = false;
+                            console.log(`Loaded ${words.length} words`);
+                        } else {
+                            alert('No words found in file!');
+                        }
+                    } catch (error) {
+                        alert('Error parsing JSON file: ' + error.message);
+                    }
+                };
+                reader.readAsText(file);
+            }
+        });
+
+        // Start game
+        startBtn.addEventListener('click', handleStartGame);
+        playAgainBtn.addEventListener('click', restartGame);
+
+        // Game controls
+        correctBtn.addEventListener('click', () => handleAnswer('correct'));
+        skipBtn.addEventListener('click', () => handleAnswer('skip'));
+        pauseBtn.addEventListener('click', togglePause);
+        resetBtn.addEventListener('click', resetTimer);
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', function(e) {
+            if (!gameActive) return;
+            
+            if (e.key === 'ArrowRight' || e.key === 's' || e.key === 'S') {
+                handleAnswer('skip');
+            } else if (e.key === 'ArrowUp' || e.key === 'c' || e.key === 'C' || e.key === ' ') {
+                e.preventDefault();
+                handleAnswer('correct');
+            } else if (e.key === 'p' || e.key === 'P') {
+                togglePause();
+            } else if (e.key === 'r' || e.key === 'R') {
+                resetTimer();
+            }
+        });
+
+        async function handleStartGame() {
+            // If no words loaded, try to load words1k.json automatically
+            defaultPath = 'data/words1k.json';
+            if (words.length === 0) {
+                try {
+                    startBtn.disabled = true;
+                    startBtn.textContent = `Loading ${defaultPath}...`;
+                    
+                    const response = await fetch(defaultPath);
+                    if (!response.ok) {
+                        throw new Error(`${defaultPath} not found`);
+                    }
+                    
+                    words = await response.json();
+                    
+                    if (words.length === 0) {
+                        alert(`No words found in ${defaultPath}`);
+                        startBtn.textContent = 'Start Game';
+                        startBtn.disabled = false;
+                        return;
+                    }
+                    
+                    fileName.textContent = `✓ Loaded: ${defaultPath} (${words.length} words)`;
+                    console.log(`Auto-loaded ${words.length} words from ${defaultPath}`);
+                } catch (error) {
+                    alert(`Please load a words file first! (${defautlPath} not found)`);
+                    startBtn.textContent = 'Start Game';
+                    startBtn.disabled = false;
+                    return;
+                }
+            }
+            
+            startGame();
+        }
+
+        function startGame() {
+            // Reset session word tracking
+            sessionWords.clear();
+            
+            // Shuffle words
+            words = shuffleArray(words);
+            currentIndex = 0;
+            correctCount = 0;
+            skippedCount = 0;
+            correctWords = [];
+            skippedWords = [];
+            timeLeft = 60;
+            gameActive = true;
+
+            // Show game screen
+            startScreen.classList.add('hidden');
+            gameScreen.classList.remove('hidden');
+            summaryScreen.classList.add('hidden');
+            timerControls.style.display = 'flex';
+
+            // Display first word
+            displayWord();
+
+            // Start timer
+            isPaused = false;
+            startTimer();
+        }
+
+        function displayWord() {
+            // Skip words already shown in this session
+            while (currentIndex < words.length && sessionWords.has(words[currentIndex].word.toLowerCase())) {
+                currentIndex++;
+            }
+            
+            if (currentIndex >= words.length) {
+                // No more words, end game
+                endGame();
+                return;
+            }
+
+            const card = words[currentIndex];
+            
+            // Add to session tracking
+            sessionWords.add(card.word.toLowerCase());
+            
+            targetWord.textContent = card.word.toUpperCase();
+
+            // Display banned words
+            bannedList.innerHTML = '';
+            card.banned.forEach(word => {
+                const div = document.createElement('div');
+                div.className = 'banned-item';
+                div.textContent = word;
+                bannedList.appendChild(div);
+            });
+
+            updateScore();
+        }
+
+        function handleAnswer(type) {
+            if (!gameActive || isPaused) return;
+
+            const card = words[currentIndex];
+            
+            if (type === 'correct') {
+                correctCount++;
+                correctWords.push(card.word);
+            } else {
+                skippedCount++;
+                skippedWords.push(card.word);
+            }
+
+            currentIndex++;
+            displayWord();
+        }
+
+        function startTimer() {
+            timerInterval = setInterval(() => {
+                if (!isPaused) {
+                    timeLeft--;
+                    updateTimer();
+
+                    if (timeLeft <= 0) {
+                        endGame();
+                    }
+                }
+            }, 1000);
+        }
+
+        function togglePause() {
+            if (!gameActive) return;
+            
+            isPaused = !isPaused;
+            pauseBtn.textContent = isPaused ? '▶️ Resume' : '⏸️ Pause';
+            
+            if (isPaused) {
+                timerDisplay.style.opacity = '0.5';
+            } else {
+                timerDisplay.style.opacity = '1';
+            }
+        }
+
+        function resetTimer() {
+            if (!gameActive) return;
+            
+            if (confirm('Reset the timer to 60 seconds? (Your score will be kept)')) {
+                timeLeft = 60;
+                isPaused = false;
+                pauseBtn.textContent = '⏸️ Pause';
+                timerDisplay.style.opacity = '1';
+                timerDisplay.classList.remove('warning');
+                updateTimer();
+            }
+        }
+
+        function updateTimer() {
+            const minutes = Math.floor(timeLeft / 60);
+            const seconds = timeLeft % 60;
+            timerDisplay.textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+
+            if (timeLeft <= 10) {
+                timerDisplay.classList.add('warning');
+            } else {
+                timerDisplay.classList.remove('warning');
+            }
+        }
+
+        function updateScore() {
+            scoreDisplay.textContent = `Correct: ${correctCount} | Skipped: ${skippedCount}`;
+        }
+
+        function endGame() {
+            gameActive = false;
+            isPaused = false;
+            clearInterval(timerInterval);
+            timerControls.style.display = 'none';
+
+            // Show summary screen
+            gameScreen.classList.add('hidden');
+            summaryScreen.classList.remove('hidden');
+
+            // Display final score
+            document.getElementById('finalScore').textContent = correctCount;
+
+            // Display correct words
+            const correctWordsDiv = document.getElementById('correctWords');
+            correctWordsDiv.innerHTML = '';
+            if (correctWords.length === 0) {
+                correctWordsDiv.innerHTML = '<div class="word-list-item">No correct answers</div>';
+            } else {
+                correctWords.forEach(word => {
+                    const div = document.createElement('div');
+                    div.className = 'word-list-item correct';
+                    div.textContent = word;
+                    correctWordsDiv.appendChild(div);
+                });
+            }
+
+            // Display skipped words
+            const skippedWordsDiv = document.getElementById('skippedWords');
+            skippedWordsDiv.innerHTML = '';
+            if (skippedWords.length === 0) {
+                skippedWordsDiv.innerHTML = '<div class="word-list-item">No skipped words</div>';
+            } else {
+                skippedWords.forEach(word => {
+                    const div = document.createElement('div');
+                    div.className = 'word-list-item skipped';
+                    div.textContent = word;
+                    skippedWordsDiv.appendChild(div);
+                });
+            }
+        }
+
+        function restartGame() {
+            timeLeft = 60;
+            isPaused = false;
+            timerDisplay.textContent = '1:00';
+            timerDisplay.classList.remove('warning');
+            timerDisplay.style.opacity = '1';
+            pauseBtn.textContent = '⏸️ Pause';
+            summaryScreen.classList.add('hidden');
+            startScreen.classList.remove('hidden');
+        }
+
+        function shuffleArray(array) {
+            const newArray = [...array];
+            for (let i = newArray.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+            }
+            return newArray;
+        }
+    </script>
+</body>
+</html>

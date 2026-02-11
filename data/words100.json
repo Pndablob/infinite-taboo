@@ -1,0 +1,1012 @@
+[
+  {
+    "word": "cereal",
+    "banned": [
+      "food",
+      "porridge",
+      "breakfast",
+      "grain",
+      "bar"
+    ]
+  },
+  {
+    "word": "amour",
+    "banned": [
+      "love",
+      "romance",
+      "hate",
+      "enjoy",
+      "marriage"
+    ]
+  },
+  {
+    "word": "encyclopedia",
+    "banned": [
+      "book",
+      "library",
+      "index",
+      "dictionary",
+      "volume"
+    ]
+  },
+  {
+    "word": "stereo",
+    "banned": [
+      "radio",
+      "television",
+      "sound system",
+      "earphone",
+      "loudspeaker"
+    ]
+  },
+  {
+    "word": "magnanimous",
+    "banned": [
+      "generous",
+      "amiable",
+      "humble",
+      "selfless",
+      "compassionate"
+    ]
+  },
+  {
+    "word": "elephant",
+    "banned": [
+      "dinosaur",
+      "tiger",
+      "cow",
+      "snake",
+      "panda"
+    ]
+  },
+  {
+    "word": "gadget",
+    "banned": [
+      "machine",
+      "device",
+      "tool",
+      "instrument",
+      "object"
+    ]
+  },
+  {
+    "word": "ambrosia",
+    "banned": [
+      "food",
+      "glory",
+      "sugar",
+      "mythology",
+      "delicious"
+    ]
+  },
+  {
+    "word": "dexterity",
+    "banned": [
+      "handy",
+      "skillful",
+      "artful",
+      "nimble",
+      "expertise"
+    ]
+  },
+  {
+    "word": "juxtaposition",
+    "banned": [
+      "opposite",
+      "contrast",
+      "parallel",
+      "complement",
+      "side-by-side"
+    ]
+  },
+  {
+    "word": "umbrella",
+    "banned": [
+      "green",
+      "rainy",
+      "waterproof",
+      "sunshade",
+      "carry"
+    ]
+  },
+  {
+    "word": "pneumonoultramicroscopicsilicovolcanoconiosis",
+    "banned": [
+      "lung disease",
+      "chronic respiratory disorder",
+      "silica lung",
+      "miner's disease",
+      "granulomatous lung"
+    ]
+  },
+  {
+    "word": "furniture",
+    "banned": [
+      "chair",
+      "table",
+      "cupboard",
+      "window",
+      "door"
+    ]
+  },
+  {
+    "word": "ambition",
+    "banned": [
+      "aim",
+      "desire",
+      "goal",
+      "dream",
+      "objective"
+    ]
+  },
+  {
+    "word": "stereotype",
+    "banned": [
+      "personality",
+      "characteristic",
+      "description",
+      "bias",
+      "generalization"
+    ]
+  },
+  {
+    "word": "whiskey",
+    "banned": [
+      "liquid",
+      "distilled",
+      "alcohol",
+      "tobacco",
+      "beer"
+    ]
+  },
+  {
+    "word": "ambulance",
+    "banned": [
+      "hearse",
+      "hospital",
+      "fire engine",
+      "police car",
+      "emergency vehicle"
+    ]
+  },
+  {
+    "word": "cactus",
+    "banned": [
+      "plant",
+      "stem",
+      "root",
+      "seeds",
+      "desert"
+    ]
+  },
+  {
+    "word": "palindrome",
+    "banned": [
+      "man",
+      "women",
+      "tree",
+      "dog",
+      "car"
+    ]
+  },
+  {
+    "word": "ambiguity",
+    "banned": [
+      "mean",
+      "connotation",
+      "definable",
+      "subjective",
+      "ambiguous"
+    ]
+  },
+  {
+    "word": "sunset",
+    "banned": [
+      "evening",
+      "daylight",
+      "dusk",
+      "morning",
+      "night"
+    ]
+  },
+  {
+    "word": "ambivalence",
+    "banned": [
+      "like",
+      "dislike",
+      "love",
+      "hate",
+      "choice"
+    ]
+  },
+  {
+    "word": "pinnacle",
+    "banned": [
+      "peak",
+      "top",
+      "highest point",
+      "mountain summit",
+      "culmination"
+    ]
+  },
+  {
+    "word": "demonstration",
+    "banned": [
+      "show",
+      "lecture",
+      "presentation",
+      "display",
+      "exhibit"
+    ]
+  },
+  {
+    "word": "paradox",
+    "banned": [
+      "contradiction",
+      "ambiguity",
+      "self-contradictory",
+      "inconsistent",
+      "opposite"
+    ]
+  },
+  {
+    "word": "whisker",
+    "banned": [
+      "tail",
+      "feather",
+      "claw",
+      "tusk",
+      "fur"
+    ]
+  },
+  {
+    "word": "magnanimity",
+    "banned": [
+      "generous",
+      "huge",
+      "charitable",
+      "cruelty",
+      "graciousness"
+    ]
+  },
+  {
+    "word": "jewelry",
+    "banned": [
+      "earring",
+      "bracelet",
+      "necklace",
+      "chain",
+      "pendant"
+    ]
+  },
+  {
+    "word": "dolphin",
+    "banned": [
+      "fish",
+      "sea animal",
+      "water creature",
+      "shark",
+      "marine mammal"
+    ]
+  },
+  {
+    "word": "dinosaur",
+    "banned": [
+      "bird",
+      "feather",
+      "claw",
+      "paleontologist",
+      "prehistoric"
+    ]
+  },
+  {
+    "word": "dormitory",
+    "banned": [
+      "bedroom",
+      "school",
+      "apartment",
+      "gymnasium",
+      "office"
+    ]
+  },
+  {
+    "word": "gourmet",
+    "banned": [
+      "tasty",
+      "delicious",
+      "restaurant",
+      "chef",
+      "meal"
+    ]
+  },
+  {
+    "word": "jazzercise",
+    "banned": [
+      "exercise",
+      "dance",
+      "cardio",
+      "classical music",
+      "fitness"
+    ]
+  },
+  {
+    "word": "skepticism",
+    "banned": [
+      "doubtful",
+      "argumentative",
+      "questionable",
+      "contrarian",
+      "sceptical"
+    ]
+  },
+  {
+    "word": "sustainability",
+    "banned": [
+      "environmental",
+      "conservation",
+      "green",
+      "eco-friendly",
+      "renewable"
+    ]
+  },
+  {
+    "word": "puzzle",
+    "banned": [
+      "solution",
+      "answer",
+      "piece",
+      "key",
+      "challenge"
+    ]
+  },
+  {
+    "word": "determination",
+    "banned": [
+      "decision",
+      "resolve",
+      "commitment",
+      "resolution",
+      "choice"
+    ]
+  },
+  {
+    "word": "gymnastics",
+    "banned": [
+      "exercise",
+      "yoga",
+      "art",
+      "athlete",
+      "competition"
+    ]
+  },
+  {
+    "word": "cucumber",
+    "banned": [
+      "fruit",
+      "vegetable",
+      "zucchini",
+      "eggplant",
+      "pepper"
+    ]
+  },
+  {
+    "word": "gigabyte",
+    "banned": [
+      "big",
+      "computer",
+      "storage",
+      "large",
+      "data"
+    ]
+  },
+  {
+    "word": "piano",
+    "banned": [
+      "keyboard",
+      "instrument",
+      "acoustic",
+      "fortepiano",
+      "organ"
+    ]
+  },
+  {
+    "word": "patriotism",
+    "banned": [
+      "loyalty",
+      "love",
+      "support",
+      "friendship",
+      "citizen"
+    ]
+  },
+  {
+    "word": "satisfaction",
+    "banned": [
+      "happy",
+      "joyful",
+      "pleased",
+      "delighted",
+      "content"
+    ]
+  },
+  {
+    "word": "mango",
+    "banned": [
+      "fruit",
+      "vegetable",
+      "yellow",
+      "ripe",
+      "sweet"
+    ]
+  },
+  {
+    "word": "cabinet",
+    "banned": [
+      "box",
+      "table",
+      "chair",
+      "desk",
+      "drawer"
+    ]
+  },
+  {
+    "word": "mystery",
+    "banned": [
+      "secret",
+      "riddle",
+      "enigma",
+      "puzzle",
+      "concealment"
+    ]
+  },
+  {
+    "word": "souvenir",
+    "banned": [
+      "memory",
+      "memorial",
+      "recollection",
+      "collectible",
+      "trophy"
+    ]
+  },
+  {
+    "word": "candle",
+    "banned": [
+      "light",
+      "burn",
+      "oil",
+      "lamp",
+      "flame"
+    ]
+  },
+  {
+    "word": "ambidextrousness",
+    "banned": [
+      "left-handed",
+      "right-handed",
+      "opposite",
+      "symmetrical",
+      "unilateral"
+    ]
+  },
+  {
+    "word": "magnetism",
+    "banned": [
+      "attraction",
+      "force",
+      "north pole",
+      "south pole",
+      "induction"
+    ]
+  },
+  {
+    "word": "stadium",
+    "banned": [
+      "ground",
+      "sports",
+      "building",
+      "field",
+      "arena"
+    ]
+  },
+  {
+    "word": "gigantic",
+    "banned": [
+      "big",
+      "huge",
+      "massive",
+      "enormous",
+      "superior"
+    ]
+  },
+  {
+    "word": "sophistication",
+    "banned": [
+      "complexity",
+      "art",
+      "education",
+      "elevate",
+      "genius"
+    ]
+  },
+  {
+    "word": "stamina",
+    "banned": [
+      "strength",
+      "endurance",
+      "capacity",
+      "effort",
+      "energy"
+    ]
+  },
+  {
+    "word": "gazelle",
+    "banned": [
+      "deer",
+      "antelope",
+      "cassowary",
+      "rhinoceros",
+      "lion"
+    ]
+  },
+  {
+    "word": "diligent",
+    "banned": [
+      "careful",
+      "busyness",
+      "hardworking",
+      "sleek",
+      "productive"
+    ]
+  },
+  {
+    "word": "parakeet",
+    "banned": [
+      "bird",
+      "pet",
+      "small",
+      "cage",
+      "talking"
+    ]
+  },
+  {
+    "word": "parrot",
+    "banned": [
+      "bird",
+      "talk",
+      "cage",
+      "pet",
+      "dove"
+    ]
+  },
+  {
+    "word": "cryptography",
+    "banned": [
+      "secret",
+      "code",
+      "encryption",
+      "algorithm",
+      "key"
+    ]
+  },
+  {
+    "word": "giggle",
+    "banned": [
+      "laugh",
+      "smile",
+      "joke",
+      "hug",
+      "cry"
+    ]
+  },
+  {
+    "word": "dilemma",
+    "banned": [
+      "difficult",
+      "choice",
+      "ambiguity",
+      "conundrum",
+      "problem"
+    ]
+  },
+  {
+    "word": "gymnasium",
+    "banned": [
+      "classroom",
+      "school building",
+      "television",
+      "office",
+      "library"
+    ]
+  },
+  {
+    "word": "giraffe",
+    "banned": [
+      "antelope",
+      "elephant",
+      "zebra",
+      "calf",
+      "tail"
+    ]
+  },
+  {
+    "word": "gymnast",
+    "banned": [
+      "athlete",
+      "exercise",
+      "classroom",
+      "muscle",
+      "schoolday"
+    ]
+  },
+  {
+    "word": "diligence",
+    "banned": [
+      "hardworking",
+      "careful",
+      "efficient",
+      "knowledgeable",
+      "intelligent"
+    ]
+  },
+  {
+    "word": "sphinx",
+    "banned": [
+      "king",
+      "lion",
+      "cat",
+      "spider",
+      "snake"
+    ]
+  },
+  {
+    "word": "sapphire",
+    "banned": [
+      "blue",
+      "ruby",
+      "pearl",
+      "diamond",
+      "jade"
+    ]
+  },
+  {
+    "word": "dreadlock",
+    "banned": [
+      "lock",
+      "dead",
+      "hair",
+      "dangerous",
+      "painful"
+    ]
+  },
+  {
+    "word": "magnificence",
+    "banned": [
+      "big",
+      "splendid",
+      "stunning",
+      "awesome",
+      "gorgeous"
+    ]
+  },
+  {
+    "word": "whistle",
+    "banned": [
+      "speak",
+      "tongue",
+      "hurt",
+      "wind",
+      "tease"
+    ]
+  },
+  {
+    "word": "couch",
+    "banned": [
+      "chair",
+      "sofa",
+      "bench",
+      "stool",
+      "table"
+    ]
+  },
+  {
+    "word": "stapler",
+    "banned": [
+      "paperclip",
+      "glue",
+      "eraser",
+      "scissors",
+      "clipping"
+    ]
+  },
+  {
+    "word": "magnet",
+    "banned": [
+      "electromagnet",
+      "induction",
+      "neodymium",
+      "permanent",
+      "superior"
+    ]
+  },
+  {
+    "word": "motel",
+    "banned": [
+      "room",
+      "car",
+      "hotel",
+      "stay",
+      "parking"
+    ]
+  },
+  {
+    "word": "candlestick",
+    "banned": [
+      "stick",
+      "fire",
+      "light",
+      "burning",
+      "match"
+    ]
+  },
+  {
+    "word": "sabotage",
+    "banned": [
+      "attack",
+      "damage",
+      "destroy",
+      "harm",
+      "misuse"
+    ]
+  },
+  {
+    "word": "gambit",
+    "banned": [
+      "scheme",
+      "trap",
+      "move",
+      "strategy",
+      "opportunity"
+    ]
+  },
+  {
+    "word": "soufflé",
+    "banned": [
+      "fluffy",
+      "crispy",
+      "cheesy",
+      "cake",
+      "pan"
+    ]
+  },
+  {
+    "word": "whisk",
+    "banned": [
+      "mix",
+      "cream",
+      "spin",
+      "beat",
+      "stir"
+    ]
+  },
+  {
+    "word": "catharsis",
+    "banned": [
+      "therapy",
+      "relieve stress",
+      "emotional release",
+      "purge emotions",
+      "release tension"
+    ]
+  },
+  {
+    "word": "doughnut",
+    "banned": [
+      "apple",
+      "orange",
+      "banana",
+      "pie",
+      "cookie"
+    ]
+  },
+  {
+    "word": "whale",
+    "banned": [
+      "fish",
+      "shark",
+      "dolphin",
+      "porpoise",
+      "mammal"
+    ]
+  },
+  {
+    "word": "ambidextrous",
+    "banned": [
+      "right-handed",
+      "left-handed",
+      "dexterous",
+      "dominant",
+      "unilateral"
+    ]
+  },
+  {
+    "word": "paradigm",
+    "banned": [
+      "model",
+      "template",
+      "framework",
+      "conceptual framework",
+      "ideology"
+    ]
+  },
+  {
+    "word": "dynamics",
+    "banned": [
+      "motions",
+      "mechanics",
+      "kinematics",
+      "telepathy",
+      "entropy"
+    ]
+  },
+  {
+    "word": "palimony",
+    "banned": [
+      "marriage",
+      "spouse",
+      "engagement",
+      "divorce",
+      "union"
+    ]
+  },
+  {
+    "word": "suggestion",
+    "banned": [
+      "advise",
+      "proposal",
+      "concern",
+      "idea",
+      "opinion"
+    ]
+  },
+  {
+    "word": "junk",
+    "banned": [
+      "trash",
+      "waste",
+      "garbage",
+      "debris",
+      "discard"
+    ]
+  },
+  {
+    "word": "papaya",
+    "banned": [
+      "fruit",
+      "banana",
+      "orange",
+      "lemon",
+      "tropical"
+    ]
+  },
+  {
+    "word": "sophomore",
+    "banned": [
+      "second",
+      "junior",
+      "last year",
+      "undergrad",
+      "freshman"
+    ]
+  },
+  {
+    "word": "souffle",
+    "banned": [
+      "fry",
+      "pancake",
+      "flour",
+      "oven",
+      "chocolate"
+    ]
+  },
+  {
+    "word": "sundial",
+    "banned": [
+      "clock",
+      "garden",
+      "sun",
+      "hour",
+      "pendulum"
+    ]
+  },
+  {
+    "word": "amphibian",
+    "banned": [
+      "fish",
+      "crocodile",
+      "turtle",
+      "reptile",
+      "toad"
+    ]
+  },
+  {
+    "word": "parachute",
+    "banned": [
+      "jump",
+      "airplane",
+      "safety",
+      "skydiving",
+      "hang gliding"
+    ]
+  },
+  {
+    "word": "sophistry",
+    "banned": [
+      "argumentation",
+      "persuasion",
+      "convincing",
+      "logic",
+      "evidence"
+    ]
+  },
+  {
+    "word": "dread",
+    "banned": [
+      "fear",
+      "horror",
+      "awful",
+      "terrifying",
+      "scary"
+    ]
+  },
+  {
+    "word": "magnify",
+    "banned": [
+      "increase",
+      "enlarge",
+      "grow",
+      "expand",
+      "amplify"
+    ]
+  },
+  {
+    "word": "jubilation",
+    "banned": [
+      "celebration",
+      "joy",
+      "happy",
+      "excitement",
+      "outburst"
+    ]
+  },
+  {
+    "word": "syringe",
+    "banned": [
+      "needle",
+      "injection",
+      "hypodermic",
+      "vaccine",
+      "penis"
+    ]
+  },
+  {
+    "word": "mystique",
+    "banned": [
+      "magic",
+      "illusion",
+      "secret",
+      "magician",
+      "spell"
+    ]
+  },
+  {
+    "word": "demonstrator",
+    "banned": [
+      "student",
+      "teacher",
+      "school",
+      "classroom",
+      "exam"
+    ]
+  }
+]

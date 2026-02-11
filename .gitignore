@@ -1,0 +1,18 @@
+# python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+.venv/
+venv/
+ENV/
+env/
+
+# model files
+*.bin
+*.onnx
+*.safetensors
+
+# ide
+.vscode/

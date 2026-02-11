@@ -1,0 +1,7 @@
+transformers>=4.37.0
+torch>=2.0.0
+accelerate>=0.20.0
+sentencepiece>=0.1.99
+tqdm>=4.65.0
+flask>=3.0.0
+flask-cors>=4.0.0

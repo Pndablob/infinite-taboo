@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taboo Game - AI Powered</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 600px;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+            position: relative;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .ai-badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+
+        .timer {
+            font-size: 3em;
+            font-weight: bold;
+            margin: 10px 0;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .timer.warning {
+            color: #ff6b6b;
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .score-display {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .timer-controls {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .btn-timer {
+            padding: 12px 20px;
+            font-size: 1em;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 2px solid white;
+            flex: 1;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: bold;
+        }
+
+        .btn-timer:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .card {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .target-word {
+            font-size: 3em;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .banned-words {
+            background: #fff5f5;
+            border: 3px solid #ff6b6b;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+        }
+
+        .banned-words h3 {
+            color: #c92a2a;
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .banned-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .banned-item {
+            background: white;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 1.2em;
+            font-weight: 500;
+            color: #c92a2a;
+            border: 2px solid #ff6b6b;
+        }
+
+        .controls {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        button {
+            flex: 1;
+            padding: 18px 30px;
+            font-size: 1.2em;
+            font-weight: bold;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        button:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .btn-correct {
+            background: #51cf66;
+            color: white;
+        }
+
+        .btn-correct:hover:not(:disabled) {
+            background: #40c057;
+        }
+
+        .btn-skip {
+            background: #ffd43b;
+            color: #333;
+        }
+
+        .btn-skip:hover:not(:disabled) {
+            background: #fcc419;
+        }
+
+        .btn-start {
+            background: #667eea;
+            color: white;
+            width: 100%;
+        }
+
+        .btn-start:hover:not(:disabled) {
+            background: #5a67d8;
+        }
+
+        .start-screen, .summary-screen {
+            text-align: center;
+            padding: 40px;
+        }
+
+        .start-screen h2, .summary-screen h2 {
+            font-size: 2em;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .start-screen p {
+            font-size: 1.2em;
+            color: #666;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .summary-screen {
+            padding: 30px;
+        }
+
+        .final-score {
+            font-size: 4em;
+            font-weight: bold;
+            color: #667eea;
+            margin: 20px 0;
+        }
+
+        .word-list {
+            margin-top: 30px;
+            text-align: left;
+        }
+
+        .word-list h3 {
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .word-list-section {
+            margin-bottom: 25px;
+        }
+
+        .word-list-items {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 15px;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .word-list-item {
+            padding: 8px;
+            border-bottom: 1px solid #dee2e6;
+            font-size: 1.1em;
+        }
+
+        .word-list-item:last-child {
+            border-bottom: none;
+        }
+
+        .word-list-item.correct {
+            color: #40c057;
+        }
+
+        .word-list-item.skipped {
+            color: #868e96;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            margin: 10px 0;
+        }
+
+        .status-loading {
+            background: #ffd43b;
+            color: #333;
+        }
+
+        .status-ready {
+            background: #51cf66;
+            color: white;
+        }
+
+        .status-error {
+            background: #ff6b6b;
+            color: white;
+        }
+
+        .loading-spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎯 TABOO GAME</h1>
+            <div class="ai-badge">🤖 AI-Powered • Infinite Words</div>
+            <div class="timer" id="timer">1:00</div>
+            <div class="timer-controls" id="timerControls" style="display: none;">
+                <button class="btn-timer" id="pauseBtn">⏸️ Pause</button>
+                <button class="btn-timer" id="resetBtn">🔄 Reset</button>
+            </div>
+            <div class="score-display">
+                <span id="scoreDisplay">Correct: 0 | Skipped: 0</span>
+            </div>
+        </div>
+
+        <!-- Start Screen -->
+        <div id="startScreen" class="start-screen">
+            <h2>Ready to Play?</h2>
+            <div id="modelStatus" class="status-badge status-loading">
+                <span class="loading-spinner"></span> Loading AI Model...
+            </div>
+            <p>The AI will generate unique words on-the-fly as you play!</p>
+            <p>Give clues to help your team guess the target word without using any banned words!</p>
+            <p><strong>You have 60 seconds. Good luck!</strong></p>
+            <button class="btn-start" id="startBtn" disabled>Start Game</button>
+        </div>
+
+        <!-- Game Screen -->
+        <div id="gameScreen" class="content hidden">
+            <div class="card">
+                <div class="target-word" id="targetWord">LOADING...</div>
+                <div class="banned-words">
+                    <h3>🚫 Banned Words</h3>
+                    <div class="banned-list" id="bannedList">
+                        <div class="banned-item">Loading...</div>
+                    </div>
+                </div>
+            </div>
+            <div class="controls">
+                <button class="btn-correct" id="correctBtn">✓ Correct</button>
+                <button class="btn-skip" id="skipBtn">→ Skip</button>
+            </div>
+        </div>
+
+        <!-- Summary Screen -->
+        <div id="summaryScreen" class="summary-screen hidden">
+            <h2>🎉 Game Over!</h2>
+            <div class="final-score" id="finalScore">0</div>
+            <p style="font-size: 1.3em; color: #666;">Correct Answers</p>
+            
+            <div class="word-list">
+                <div class="word-list-section">
+                    <h3 style="color: #40c057;">✓ Correct Words</h3>
+                    <div class="word-list-items" id="correctWords"></div>
+                </div>
+                
+                <div class="word-list-section">
+                    <h3 style="color: #868e96;">→ Skipped Words</h3>
+                    <div class="word-list-items" id="skippedWords"></div>
+                </div>
+            </div>
+
+            <button class="btn-start" id="playAgainBtn" style="margin-top: 30px;">Play Again</button>
+        </div>
+    </div>
+
+    <script>
+        const API_URL = 'http://localhost:5000/api';
+        
+        let currentCard = null;
+        let correctCount = 0;
+        let skippedCount = 0;
+        let correctWords = [];
+        let skippedWords = [];
+        let timeLeft = 60;
+        let timerInterval = null;
+        let gameActive = false;
+        let isPaused = false;
+        let isModelReady = false;
+        let sessionWords = new Set(); // Track words shown in this session
+
+        const startScreen = document.getElementById('startScreen');
+        const gameScreen = document.getElementById('gameScreen');
+        const summaryScreen = document.getElementById('summaryScreen');
+        const startBtn = document.getElementById('startBtn');
+        const correctBtn = document.getElementById('correctBtn');
+        const skipBtn = document.getElementById('skipBtn');
+        const playAgainBtn = document.getElementById('playAgainBtn');
+        const timerDisplay = document.getElementById('timer');
+        const scoreDisplay = document.getElementById('scoreDisplay');
+        const targetWord = document.getElementById('targetWord');
+        const bannedList = document.getElementById('bannedList');
+        const pauseBtn = document.getElementById('pauseBtn');
+        const resetBtn = document.getElementById('resetBtn');
+        const timerControls = document.getElementById('timerControls');
+        const modelStatus = document.getElementById('modelStatus');
+
+        // Check model status
+        async function checkModelStatus() {
+            try {
+                const response = await fetch(`${API_URL}/status`);
+                const data = await response.json();
+                
+                if (data.loaded) {
+                    isModelReady = true;
+                    modelStatus.className = 'status-badge status-ready';
+                    modelStatus.innerHTML = `✅ AI Ready • ${data.total_generated || 0} Unique Words • Cache: ${data.cache_size}`;
+                    startBtn.disabled = false;
+                } else {
+                    setTimeout(checkModelStatus, 2000);
+                }
+            } catch (error) {
+                modelStatus.className = 'status-badge status-error';
+                modelStatus.innerHTML = '❌ Server Not Connected';
+                setTimeout(checkModelStatus, 3000);
+            }
+        }
+
+        // Generate new card
+        async function generateCard() {
+            try {
+                correctBtn.disabled = true;
+                skipBtn.disabled = true;
+                
+                const response = await fetch(`${API_URL}/generate`);
+                const card = await response.json();
+                
+                if (card.error) {
+                    throw new Error(card.error);
+                }
+                
+                correctBtn.disabled = false;
+                skipBtn.disabled = false;
+                
+                return card;
+            } catch (error) {
+                console.error('Error generating card:', error);
+                alert('Failed to generate card. Please try again.');
+                return null;
+            }
+        }
+
+        // Display card
+        function displayCard(card) {
+            if (!card) return;
+            
+            currentCard = card;
+            
+            // Add to session tracking
+            sessionWords.add(card.word.toLowerCase());
+            
+            targetWord.textContent = card.word.toUpperCase();
+            
+            bannedList.innerHTML = '';
+            card.banned.forEach(word => {
+                const div = document.createElement('div');
+                div.className = 'banned-item';
+                div.textContent = word;
+                bannedList.appendChild(div);
+            });
+            
+            updateScore();
+        }
+
+        // Start game
+        startBtn.addEventListener('click', async function() {
+            if (!isModelReady) return;
+            
+            // Reset session word tracking
+            sessionWords.clear();
+            
+            correctCount = 0;
+            skippedCount = 0;
+            correctWords = [];
+            skippedWords = [];
+            timeLeft = 60;
+            gameActive = true;
+            isPaused = false;
+
+            startScreen.classList.add('hidden');
+            gameScreen.classList.remove('hidden');
+            summaryScreen.classList.add('hidden');
+            timerControls.style.display = 'flex';
+
+            // Generate first card
+            const card = await generateCard();
+            displayCard(card);
+
+            startTimer();
+        });
+
+        playAgainBtn.addEventListener('click', restartGame);
+
+        // Game controls
+        correctBtn.addEventListener('click', () => handleAnswer('correct'));
+        skipBtn.addEventListener('click', () => handleAnswer('skip'));
+        pauseBtn.addEventListener('click', togglePause);
+        resetBtn.addEventListener('click', resetTimer);
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', function(e) {
+            if (!gameActive) return;
+            
+            if (e.key === 'ArrowRight' || e.key === 's' || e.key === 'S') {
+                handleAnswer('skip');
+            } else if (e.key === 'ArrowUp' || e.key === 'c' || e.key === 'C' || e.key === ' ') {
+                e.preventDefault();
+                handleAnswer('correct');
+            } else if (e.key === 'p' || e.key === 'P') {
+                togglePause();
+            } else if (e.key === 'r' || e.key === 'R') {
+                resetTimer();
+            }
+        });
+
+        async function handleAnswer(type) {
+            if (!gameActive || isPaused || !currentCard) return;
+            
+            if (type === 'correct') {
+                correctCount++;
+                correctWords.push(currentCard.word);
+            } else {
+                skippedCount++;
+                skippedWords.push(currentCard.word);
+            }
+            
+            // Generate next card, skip if duplicate in session
+            let card = await generateCard();
+            let attempts = 0;
+            while (card && sessionWords.has(card.word.toLowerCase()) && attempts < 10) {
+                console.log(`Duplicate in session: ${card.word}, requesting new card...`);
+                card = await generateCard();
+                attempts++;
+            }
+            
+            displayCard(card);
+        }
+
+        function startTimer() {
+            timerInterval = setInterval(() => {
+                if (!isPaused) {
+                    timeLeft--;
+                    updateTimer();
+
+                    if (timeLeft <= 0) {
+                        endGame();
+                    }
+                }
+            }, 1000);
+        }
+
+        function togglePause() {
+            if (!gameActive) return;
+            
+            isPaused = !isPaused;
+            pauseBtn.textContent = isPaused ? '▶️ Resume' : '⏸️ Pause';
+            
+            if (isPaused) {
+                timerDisplay.style.opacity = '0.5';
+            } else {
+                timerDisplay.style.opacity = '1';
+            }
+        }
+
+        function resetTimer() {
+            if (!gameActive) return;
+            
+            if (confirm('Reset the timer to 60 seconds? (Your score will be kept)')) {
+                timeLeft = 60;
+                isPaused = false;
+                pauseBtn.textContent = '⏸️ Pause';
+                timerDisplay.style.opacity = '1';
+                timerDisplay.classList.remove('warning');
+                updateTimer();
+            }
+        }
+
+        function updateTimer() {
+            const minutes = Math.floor(timeLeft / 60);
+            const seconds = timeLeft % 60;
+            timerDisplay.textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+
+            if (timeLeft <= 10) {
+                timerDisplay.classList.add('warning');
+            } else {
+                timerDisplay.classList.remove('warning');
+            }
+        }
+
+        function updateScore() {
+            scoreDisplay.textContent = `Correct: ${correctCount} | Skipped: ${skippedCount}`;
+        }
+
+        function endGame() {
+            gameActive = false;
+            isPaused = false;
+            clearInterval(timerInterval);
+            timerControls.style.display = 'none';
+
+            gameScreen.classList.add('hidden');
+            summaryScreen.classList.remove('hidden');
+
+            document.getElementById('finalScore').textContent = correctCount;
+
+            const correctWordsDiv = document.getElementById('correctWords');
+            correctWordsDiv.innerHTML = '';
+            if (correctWords.length === 0) {
+                correctWordsDiv.innerHTML = '<div class="word-list-item">No correct answers</div>';
+            } else {
+                correctWords.forEach(word => {
+                    const div = document.createElement('div');
+                    div.className = 'word-list-item correct';
+                    div.textContent = word;
+                    correctWordsDiv.appendChild(div);
+                });
+            }
+
+            const skippedWordsDiv = document.getElementById('skippedWords');
+            skippedWordsDiv.innerHTML = '';
+            if (skippedWords.length === 0) {
+                skippedWordsDiv.innerHTML = '<div class="word-list-item">No skipped words</div>';
+            } else {
+                skippedWords.forEach(word => {
+                    const div = document.createElement('div');
+                    div.className = 'word-list-item skipped';
+                    div.textContent = word;
+                    skippedWordsDiv.appendChild(div);
+                });
+            }
+        }
+
+        function restartGame() {
+            timeLeft = 60;
+            isPaused = false;
+            timerDisplay.textContent = '1:00';
+            timerDisplay.classList.remove('warning');
+            timerDisplay.style.opacity = '1';
+            pauseBtn.textContent = '⏸️ Pause';
+            summaryScreen.classList.add('hidden');
+            startScreen.classList.remove('hidden');
+        }
+
+        // Check model status on load
+        checkModelStatus();
+        
+        // Update status periodically
+        setInterval(async () => {
+            if (isModelReady) {
+                try {
+                    const response = await fetch(`${API_URL}/status`);
+                    const data = await response.json();
+                    if (data.loaded) {
+                        modelStatus.innerHTML = `✅ AI Ready • ${data.total_generated || 0} Unique Words • Cache: ${data.cache_size}`;
+                    }
+                } catch (error) {
+                    // Ignore errors during periodic updates
+                }
+            }
+        }, 60000);
+    </script>
+</body>
+</html>
